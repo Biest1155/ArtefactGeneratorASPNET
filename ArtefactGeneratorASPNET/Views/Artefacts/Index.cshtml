@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ArtefactEntities.Models.Artefacts>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index">
+    <label class="category-label">Category</label>
+    <input list="category" name="category" />
+    <datalist id="category">
+        @if (ViewBag.Categories.Count > 0)
+        {
+            foreach (var item in ViewBag.Categories)
+            {
+                <option value="@item" />
+            }
+        }
+    </datalist>
+    <label class="type-label">Type</label>
+    <input list="type" name="type" />
+    <datalist id="type">
+        @if (ViewBag.Types.Count > 0)
+        {
+            foreach (var item in ViewBag.Types)
+            {
+                <option value="@item" />
+            }
+        }
+    </datalist>
+    <label class="setpiece-label">Setpiece</label>
+    <input name="setpiece" type="checkbox" />
+    <input type="submit" name="search" value="Søg"/>
+    <input type="submit" name="randomize" value="Random"/>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.setpiece)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.setpiece)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

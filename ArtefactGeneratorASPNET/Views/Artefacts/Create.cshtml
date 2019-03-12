@@ -1,0 +1,73 @@
+﻿@model ArtefactEntities.Models.Artefacts
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Artefacts</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" list="category" class="form-control" />
+                <datalist id="category">
+                    @if(ViewBag.Categories.Count > 0)
+                    {
+                        foreach (var item in ViewBag.Categories)
+                        {
+                            <option value="@item"/>
+                        }
+                    }
+                </datalist>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" list="type" class="form-control" />
+                <datalist id="type">
+                    @if (ViewBag.Types.Count > 0)
+                    {
+                        foreach (var item in ViewBag.Types)
+                        {
+                            <option value="@item" />
+                        }
+                    }
+                </datalist>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="setpiece" /> @Html.DisplayNameFor(model => model.setpiece)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Artifice" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
